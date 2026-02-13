@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { Section } from "@/shared/components/layout/Section";
-import { useVariablesList } from "./hooks/useVariablesList";
+import { useVariablesList } from "@/entities/variables";
 import styles from "./Variables.module.css";
-import { routes } from "@/config/routes";
+import { routes } from "@/shared/config/routes";
 
 export const Variables = () => {
   const { variables, isLoading, error } = useVariablesList();
@@ -22,23 +22,26 @@ export const Variables = () => {
 
         {error && <p className={styles.error}>{error}</p>}
 
-        {!isLoading && !error && variables && (
+        {!isLoading && !error && variables.ids.length > 0 && (
           <ul className={styles.list}>
-            {variables.map((variable) => (
-              <li key={variable.ID} className={styles.item}>
-                <Link to={`${routes.variables}/${variable.ID}`} className={styles.link}>
-                  <h2 className={styles.name}>{variable.Name}</h2>
-                  <div className={styles.meta}>
-                    <span className={styles.dataType}>
-                      Type: {variable.DataType}
-                    </span>
-                    <span className={styles.groupName}>
-                      Group: {variable.GroupName}
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
+            {variables.ids.map((id) => {
+              const variable = variables.entities[id];
+              return (
+                <li key={id} className={styles.item}>
+                  <Link to={`${routes.variables}/${id}`} className={styles.link}>
+                    <h2 className={styles.name}>{variable.Name}</h2>
+                    <div className={styles.meta}>
+                      <span className={styles.dataType}>
+                        Type: {variable.DataType}
+                      </span>
+                      <span className={styles.groupName}>
+                        Group: {variable.GroupName}
+                      </span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

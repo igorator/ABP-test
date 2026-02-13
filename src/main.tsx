@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { routes } from "@/config/routes";
+import { routes } from "@/shared/config/routes";
 import { Home } from "@/pages/Home";
 import { Variables } from "@/pages/Variables";
 import { VariableDetails } from "@/pages/VariableDetails";

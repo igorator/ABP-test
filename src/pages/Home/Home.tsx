@@ -2,29 +2,13 @@ import { Link } from "react-router";
 import { Section } from "@/shared/components/layout/Section";
 import { VinForm } from "./components/VinForm";
 import { VinHistory } from "./components/VinHistory";
-import { ResultsList } from "./components/ResultsList";
-import { useVinHistory } from "@/pages/Home/hooks/useVinHistory";
-import { useDecodeVin } from "./hooks/useDecodeVin";
+import { VinDetailsList } from "./components/VinDetailsList";
+import { useVinCodes } from "@/entities/vinCodes";
 import styles from "./Home.module.css";
-import { routes } from "@/config/routes";
+import { routes } from "@/shared/config/routes";
 
 export const Home = () => {
-  const { history, addToHistory, getFromHistory } = useVinHistory();
-  const { results, vin, isLoading, error, decode } = useDecodeVin();
-
-  const handleDecodeVin = async (vinCode: string) => {
-    const result = await decode(vinCode);
-    if (result.success) {
-      addToHistory(vinCode, result.results);
-    }
-  };
-
-  const handleSelectFromHistory = (vinCode: string) => {
-    const historyItem = getFromHistory(vinCode);
-    if (historyItem) {
-      decode(vinCode);
-    }
-  };
+  const { codes, getDetailsByCode, details, error, loading } = useVinCodes();
 
   return (
     <Section>
@@ -37,13 +21,13 @@ export const Home = () => {
           </Link>
         </nav>
 
-        <VinForm onSubmit={handleDecodeVin} isLoading={isLoading} />
+        <VinForm onSubmit={getDetailsByCode} isLoading={loading} />
 
         {error && <p className={styles.error}>{error}</p>}
 
-        <VinHistory history={history} onSelect={handleSelectFromHistory} />
+        <VinHistory history={codes} onSelect={getDetailsByCode} />
 
-        <ResultsList results={results} vin={vin} />
+        <VinDetailsList details={details} currentVin={codes[0]} />
       </div>
     </Section>
   );

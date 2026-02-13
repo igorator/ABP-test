@@ -1,8 +1,7 @@
-import type { HistoryItem } from "@/types/vin";
 import styles from "./VinHistory.module.css";
 
 type VinHistoryProps = {
-  history: HistoryItem[];
+  history: string[];
   onSelect: (vin: string) => void;
 };
 
@@ -18,14 +17,14 @@ export const VinHistory: React.FC<VinHistoryProps> = ({
     <div className={styles.history}>
       <h2 className={styles.title}>History</h2>
       <ul className={styles.list}>
-        {history.map((item) => (
-          <li key={item.timestamp} className={styles.item}>
+        {history.map((vin) => (
+          <li key={vin} className={styles.item}>
             <button
-              onClick={() => onSelect(item.vin)}
+              onClick={() => onSelect(vin)}
               className={styles.button}
               type='button'
             >
-              <span className={styles.vin}>{item.vin}</span>
+              <span className={styles.vin}>{vin}</span>
             </button>
           </li>
         ))}

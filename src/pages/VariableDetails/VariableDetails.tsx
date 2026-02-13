@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router";
 import { Section } from "@/shared/components/layout/Section";
-import { useVariableDetails } from "./hooks/useVariableDetails";
+import { useVariableDetails } from "@/entities/variables";
 import { parseHtmlToReact } from "@/utils/parseHtmlToReact";
 import styles from "./VariableDetails.module.css";
-import { routes } from "@/config/routes";
+import { routes } from "@/shared/config/routes";
 
 export const VariableDetails = () => {
   const { variableId } = useParams<{ variableId: string }>();

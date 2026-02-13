@@ -1,3 +1,5 @@
+//для безпеки щоб не використовувати dangerouslySetInnerHTML та innerHTML
+
 import parse from "html-react-parser";
 import DOMPurify from "dompurify";
 
