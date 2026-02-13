@@ -23,6 +23,8 @@ VIN Decoder - a web application for decoding vehicle VIN codes using the open NH
 - **React Hook Form**
 - **Vite**
 - **CSS Modules**
+- **html-react-parser**
+- **dompurify**
 
 ## Getting Started
 
