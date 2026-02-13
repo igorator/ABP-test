@@ -1,4 +1,4 @@
-import type { VariablesListResponse } from "./types";
+import type { VariablesListResponse } from "../types";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://vpic.nhtsa.dot.gov/api";

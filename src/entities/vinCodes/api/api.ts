@@ -1,4 +1,4 @@
-import type { VinDecodeResponse } from "./types";
+import type { VinDecodeResponse } from "../types";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || "https://vpic.nhtsa.dot.gov/api";
@@ -11,5 +11,12 @@ export async function decodeVin(vin: string): Promise<VinDecodeResponse> {
   if (!response.ok) {
     throw new Error("Failed to decode VIN");
   }
-  return response.json();
+
+  const data: VinDecodeResponse = await response.json();
+
+  if (/error/i.test(data.Message)) {
+    throw new Error(data.Message);
+  }
+
+  return data;
 }
