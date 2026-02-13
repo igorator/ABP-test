@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router";
-import { Section } from "@/shared/components/layout/Section";
+import { PageWrapper } from "@/shared/components/layout/PageWrapper";
 import { useVariableDetails } from "@/entities/variables";
-import { parseHtmlToReact } from "@/utils/parseHtmlToReact";
+import { parseHtmlToReact } from "@/shared/utils/parseHtmlToReact";
 import styles from "./VariableDetails.module.css";
 import { routes } from "@/shared/config/routes";
 
@@ -10,8 +10,8 @@ export const VariableDetails = () => {
   const { variable, isLoading, error } = useVariableDetails(variableId);
 
   return (
-    <Section>
-      <div className={styles.container}>
+    <PageWrapper>
+      <div className={styles.content}>
         <nav className={styles.nav}>
           <Link to={routes.variables} className={styles.back}>
             ← Back
@@ -42,6 +42,6 @@ export const VariableDetails = () => {
           </>
         )}
       </div>
-    </Section>
+    </PageWrapper>
   );
 };

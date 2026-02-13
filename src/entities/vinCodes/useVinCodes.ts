@@ -18,7 +18,7 @@ export function useVinCodes() {
 
   const addCode = useCallback(
     (vin: string, results: VinResult[], prev: UseVinCodesState) => {
-      const codes = [vin, ...prev.codes.filter((c) => c !== vin)].slice(
+      const codes = [vin, ...prev.codes.filter((code) => code !== vin)].slice(
         0,
         MAX_HISTORY_ITEMS,
       );
@@ -31,7 +31,7 @@ export function useVinCodes() {
   );
 
   const moveToTop = useCallback((vin: string, prev: UseVinCodesState) => {
-    const codes = [vin, ...prev.codes.filter((c) => c !== vin)];
+    const codes = [vin, ...prev.codes.filter((code) => code !== vin)];
 
     vinCodesStorage.saveData({ codes, entities: prev.entities });
     return codes;

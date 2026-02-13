@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Section } from "@/shared/components/layout/Section";
+import { PageWrapper } from "@/shared/components/layout/PageWrapper";
 import { VinForm } from "./components/VinForm";
 import { VinHistory } from "./components/VinHistory";
 import { VinDetailsList } from "./components/VinDetailsList";
@@ -11,24 +11,22 @@ export const Home = () => {
   const { codes, getDetailsByCode, details, error, loading } = useVinCodes();
 
   return (
-    <Section>
-      <div className={styles.container}>
-        <h1 className={styles.title}>VIN Decoder</h1>
+    <PageWrapper className={styles.page}>
+      <h1 className={styles.title}>VIN Decoder</h1>
 
-        <nav className={styles.nav}>
-          <Link to={routes.variables} className={styles.link}>
-            Variables
-          </Link>
-        </nav>
+      <nav className={styles.nav}>
+        <Link to={routes.variables} className={styles.link}>
+          Variables
+        </Link>
+      </nav>
 
-        <VinForm onSubmit={getDetailsByCode} isLoading={loading} />
+      <VinForm onSubmit={getDetailsByCode} isLoading={loading} />
 
-        {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
-        <VinHistory history={codes} onSelect={getDetailsByCode} />
+      <VinHistory history={codes} onSelect={getDetailsByCode} />
 
-        <VinDetailsList details={details} currentVin={codes[0]} />
-      </div>
-    </Section>
+      <VinDetailsList details={details} currentVin={codes[0]} />
+    </PageWrapper>
   );
 };
